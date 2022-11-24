@@ -32,12 +32,15 @@ public class UserDto extends BaseDto{
   }
 
   public Document toDocument(){
-    // TODO
-    return null;
+    return new Document()
+        .append("userName", userName)
+        .append("password", password);
   }
 
   public static UserDto fromDocument(Document match) {
-    // TODO
-    return null;
+    var userDto = new UserDto();
+    userDto.setUserName(match.getString("userName"));
+    userDto.setPassword(match.getString("password"));
+    return  userDto;
   }
 }

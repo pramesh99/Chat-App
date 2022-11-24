@@ -34,12 +34,18 @@ public class AuthDto extends BaseDto{
 
   @Override
   public Document toDocument() {
-    // TODO
-    return null;
+    var doc = new Document();
+    doc.append("userName", userName);
+    doc.append("expireTime", expireTime);
+    doc.append("hash", hash);
+    return doc;
   }
 
   public static AuthDto fromDocument(Document document){
-    // TODO
-    return null;
+    var auth = new AuthDto();
+    auth.setExpireTime(document.getLong("expireTime"));
+    auth.setUserName(document.getString("userName"));
+    auth.setHash(document.getString("hash"));
+    return auth;
   }
 }
