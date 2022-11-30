@@ -16,8 +16,8 @@ function FriendRequest(props) {
         
         console.log(friendRequestDto);
 
-        // make api call and handle response
-        fetch('/friends', {
+        // make friend request api call and handle response
+        fetch('/friendRequest', {
             method: 'POST',
             body: JSON.stringify(friendRequestDto),
             headers: {
