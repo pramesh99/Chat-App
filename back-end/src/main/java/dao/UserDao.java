@@ -2,7 +2,9 @@ package dao;
 
 import com.mongodb.client.MongoCollection;
 import dto.UserDto;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 import org.bson.Document;
 
 public class UserDao extends BaseDao<UserDto> {
@@ -28,12 +30,15 @@ public class UserDao extends BaseDao<UserDto> {
 
   @Override
   public void put(UserDto messageDto) {
-    // TODO
+    collection.insertOne(messageDto.toDocument());
   }
 
   public List<UserDto> query(Document filter){
-    // TODO
-    return null;
+    return collection.find(filter)
+        .into(new ArrayList<>())
+        .stream()
+        .map(UserDto::fromDocument)
+        .collect(Collectors.toList());
   }
 
 }

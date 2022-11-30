@@ -57,12 +57,21 @@ public class MessageDto extends BaseDto{
   }
 
   public Document toDocument(){
-    // TODO
-    return null;
+    return new Document()
+        .append("fromId", fromId)
+        .append("toId", toId)
+        .append("message", message)
+        .append("timestamp", timestamp)
+        .append("conversationId", conversationId);
   }
 
   public static MessageDto fromDocument(Document document) {
-    // TODO
-    return null;
+    var message = new MessageDto();
+    message.setMessage(document.getString("message"));
+    message.setFromId(document.getString("fromId"));
+    message.setToId(document.getString("toId"));
+    message.timestamp = document.getLong("timestamp");
+    message.conversationId = document.getString("conversationId");
+    return message;
   }
 }

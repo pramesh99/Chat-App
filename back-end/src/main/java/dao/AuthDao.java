@@ -30,12 +30,15 @@ public class AuthDao extends BaseDao<AuthDto> {
 
   @Override
   public void put(AuthDto authDto) {
-    // TODO
+    collection.insertOne(authDto.toDocument());
   }
 
   @Override
   public List<AuthDto> query(Document filter) {
-    // TODO
-    return null;
+    return collection.find(filter)
+        .into(new ArrayList<>())
+        .stream()
+        .map(AuthDto::fromDocument)
+        .collect(Collectors.toList());
   }
 }

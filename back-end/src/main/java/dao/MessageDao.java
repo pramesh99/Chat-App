@@ -31,12 +31,15 @@ public class MessageDao extends BaseDao<MessageDto> {
 
   @Override
   public void put(MessageDto messageDto) {
-    // TODO
+    collection.insertOne(messageDto.toDocument());
   }
 
   public List<MessageDto> query(Document filter){
-    // TODO
-    return null;
+    return collection.find(filter)
+        .into(new ArrayList<>())
+        .stream()
+        .map(MessageDto::fromDocument)
+        .collect(Collectors.toList());
   }
 
 }

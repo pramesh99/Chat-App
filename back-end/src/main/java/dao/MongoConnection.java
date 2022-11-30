@@ -5,7 +5,6 @@ import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import org.bson.Document;
 
-// do not need to modify this class
 public class MongoConnection {
 
     private static MongoClient mongoClient = new MongoClient("localhost", 27017);

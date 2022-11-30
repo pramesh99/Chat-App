@@ -1,6 +1,7 @@
 package response;
 
 import java.util.Map;
+import java.util.Map.Entry;
 
 public class CustomHttpResponse {
   public final Map<String,String> headers;
@@ -16,8 +17,18 @@ public class CustomHttpResponse {
     this.body = body;
   }
 
+  // TODO fill this out
   public String toString(){
-    // todo
-    return null;
+    String headerString = "";
+    for(Entry<String,String> header:  headers.entrySet()){
+      headerString += header.getKey() + ": " + header.getValue() + "\r\n";
+    }
+    String res = version + " " + status + "\n" + headerString;
+
+    if(body != null){
+      res += "\n" + body;
+    }
+
+    return res;
   }
 }

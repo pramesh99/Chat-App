@@ -11,6 +11,7 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import request.CustomParser;
 import request.ParsedRequest;
+import response.CustomHttpResponse;
 import response.HttpResponseBuilder;
 
 public class Server {
@@ -65,7 +66,7 @@ public class Server {
       ParsedRequest request = CustomParser.parse(requestString);
       BaseHandler handler = HandlerFactory.getHandler(request);
       var builder = handler.handleRequest(request);
-      builder.setHeader("Content-type", "application/json");
+      builder.setHeader("Content-Type", "application/json");
       var httpRes = builder.build();
       return httpRes.toString();
     }catch (Exception e){

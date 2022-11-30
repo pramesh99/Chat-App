@@ -30,12 +30,15 @@ public class ConversationDao extends BaseDao<ConversationDto> {
 
   @Override
   public void put(ConversationDto conversationDto) {
-    // TODO
+    collection.insertOne(conversationDto.toDocument());
   }
 
   @Override
   public List<ConversationDto> query(Document filter) {
-    // TODO
-    return null;
+    return collection.find(filter)
+        .into(new ArrayList<>())
+        .stream()
+        .map(ConversationDto::fromDocument)
+        .collect(Collectors.toList());
   }
 }
