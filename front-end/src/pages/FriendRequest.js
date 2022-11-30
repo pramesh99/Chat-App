@@ -10,8 +10,8 @@ function FriendRequest(props) {
 
         const cookies = new Cookies();
         const friendRequestDto = {
-            fromUser: props.loggedInUser,
-            toUser: toUser
+            fromId: props.loggedInUser,
+            toId: toUser
         };
         
         console.log(friendRequestDto);
@@ -28,14 +28,22 @@ function FriendRequest(props) {
             console.log(res);
 
             // friend request successful
-            if(res.status === 200) {
+            if (res.status === 200) {
                 setMessage(`Friend request sent to ${toUser}`);
                 setError(``);
                 
-            } else if(res.status === 401) {
+            } else if (res.status === 401) {
+                setError(`Missing auth header`);
+                setMessage(``);
+
+            } else if (res.status === 402) {
                 setError(`User ${toUser} does not exist`);
                 setMessage(``);
-            }
+
+            } else if (res.status === 403) {
+                setError(`Can't send request to self`);
+                setMessage(``);    
+            } 
         })
         .catch(e => {
             console.log(e);
