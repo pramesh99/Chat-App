@@ -9,7 +9,7 @@ public class FriendsDto extends BaseDto{
     private String toId;
     private Long timestamp;
     private String friendId;
-    private Integer status;
+    private Integer status; //-1 = rejected, 0 = unconfirmed, 1 = confirmed
 
     public FriendsDto() {
         this.timestamp =  Instant.now().toEpochMilli();
