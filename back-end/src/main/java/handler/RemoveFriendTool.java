@@ -16,5 +16,6 @@ public class RemoveFriendTool {
                 friendsDao.remove(temp);
             }
         }
+
     }
 }
