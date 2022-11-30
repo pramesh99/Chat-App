@@ -36,6 +36,10 @@ public class FriendsDao extends BaseDao<FriendsDto> {
         collection.insertOne(friendsDto.toDocument());
     }
 
+    public void remove(FriendsDto friendsDto){
+        collection.deleteOne(friendsDto.toDocument());
+    }
+
     public List<FriendsDto> query(Document filter){
         List<FriendsDto> messageDtos;
         messageDtos = new ArrayList<>((collection.find(filter).into(new ArrayList<>())
