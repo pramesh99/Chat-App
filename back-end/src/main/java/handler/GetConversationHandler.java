@@ -4,7 +4,6 @@ import dao.MessageDao;
 import handler.AuthFilter.AuthResult;
 import org.bson.Document;
 import request.ParsedRequest;
-import response.CustomHttpResponse;
 import response.HttpResponseBuilder;
 import response.RestApiAppResponse;
 

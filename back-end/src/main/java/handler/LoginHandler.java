@@ -4,11 +4,9 @@ import dao.AuthDao;
 import dao.UserDao;
 import dto.AuthDto;
 import java.time.Instant;
-import java.util.Map;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.bson.Document;
 import request.ParsedRequest;
-import response.CustomHttpResponse;
 import response.HttpResponseBuilder;
 
 class LoginDto{
