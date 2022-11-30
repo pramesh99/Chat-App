@@ -52,7 +52,7 @@ function App() {
               )}
               {isLoggedIn && (
                 <li>
-                  <Link to="/request">Friend Request</Link> 
+                  <Link to="/friends">Friend Request</Link> 
                 </li>
               )}
             </ul>
@@ -80,7 +80,7 @@ function App() {
                 />} 
               />
             <Route
-              path="/request" 
+              path="/friends" 
               element={<FriendRequest 
                 setIsLoggedIn={setIsLoggedIn} 
                 isLoggedIn={isLoggedIn} 

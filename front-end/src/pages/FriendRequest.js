@@ -17,7 +17,7 @@ function FriendRequest(props) {
         console.log(friendRequestDto);
 
         // make api call and handle response
-        fetch('/request', {
+        fetch('/friends', {
             method: 'POST',
             body: JSON.stringify(friendRequestDto),
             headers: {
@@ -45,7 +45,7 @@ function FriendRequest(props) {
 
     return (
         <div>
-          <h1> Friend Request</h1>
+          <h1>Friend Request</h1>
           <div>
             <input value={toUser} onChange={(e) => setToUser(e.target.value)} />
             <button onClick={handleRequest}>Send</button>
