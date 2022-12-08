@@ -7,20 +7,22 @@ import org.bson.Document;
 import request.ParsedRequest;
 import response.HttpResponseBuilder;
 
+import java.util.List;
 import java.util.Objects;
 
+public class RemoveFriendHandler implements BaseHandler{
 
-public class FriendRequestHandler implements BaseHandler {
 
     @Override
     public HttpResponseBuilder handleRequest(ParsedRequest request) {
-
         HttpResponseBuilder res = new HttpResponseBuilder();
+        RemoveFriendTool removeFriendTool = new RemoveFriendTool();
         FriendsDto friendsDto = GsonTool.gson.fromJson(request.getBody(), dto.FriendsDto.class);
         FriendsDao friendsDao = FriendsDao.getInstance();
         UserDao userDao = UserDao.getInstance();
         String fromId = friendsDto.getFromId();
         String toId = friendsDto.getToId();
+        friendsDto.setStatus(-1);
 
         // check for auth header, toId username exists or if fromId == toId
         AuthFilter.AuthResult authResult = AuthFilter.doFilter(request);
@@ -35,14 +37,12 @@ public class FriendRequestHandler implements BaseHandler {
         }
 
         String friendId = CreateMessageHandler.makeConvoId(fromId, toId);
+        List<FriendsDto> temp = friendsDao.query(new Document("friendId", friendId));
+        friendsDao.updateStatus(new Document("friendId", friendId),-1);
 
-        // if request doesn't exist create one
-        if (friendsDao.query(new Document("friendId", friendId)).size() == 0) {
-            friendsDto.setFriendId(friendId);
-            friendsDto.setStatus(1); // this is temporary change , revert when accept friend request is complete
-            friendsDao.put(friendsDto);
 
-        }
+        removeFriendTool.friendCleanup(fromId);
+        removeFriendTool.friendCleanup(toId);
 
         return res.setStatus(StatusCodes.OK);
     }

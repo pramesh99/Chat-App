@@ -4,6 +4,7 @@ import dao.FriendsDao;
 import dto.FriendsDto;
 import org.bson.Document;
 
+import java.util.Iterator;
 import java.util.List;
 
 public class RemoveFriendTool {
@@ -11,10 +12,14 @@ public class RemoveFriendTool {
         FriendsDao friendsDao = FriendsDao.getInstance();
         var filter = new Document("toId", userName);
         List<FriendsDto> friendList =  friendsDao.query(filter);
-        for (FriendsDto temp : friendList) {
-            if (temp.getStatus() == -1){
-                friendsDao.remove(temp);
-            }
+        Iterator<FriendsDto> iterator = friendList.iterator();
+        if (iterator.hasNext()) {
+            do {
+                FriendsDto temp = iterator.next();
+                if (temp.getStatus() == -1) {
+                    friendsDao.remove(temp);
+                }
+            } while (iterator.hasNext());
         }
 
     }

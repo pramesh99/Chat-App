@@ -1,11 +1,13 @@
 package dao;
 
 import com.mongodb.client.MongoCollection;
+import com.mongodb.client.model.Updates;
 import dto.FriendsDto;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import org.bson.Document;
+import org.bson.conversions.Bson;
 
 
 
@@ -34,6 +36,12 @@ public class FriendsDao extends BaseDao<FriendsDto> {
     @Override
     public void put(FriendsDto friendsDto) {
         collection.insertOne(friendsDto.toDocument());
+    }
+
+    public  void  updateStatus(Document query,int status){
+        Bson update = Updates.set("status",status);
+        collection.updateOne(query,update);
+
     }
 
     public void remove(FriendsDto friendsDto){
