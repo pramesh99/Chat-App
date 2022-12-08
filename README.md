@@ -4,4 +4,13 @@ Each team member choose 1 front end feature and 1 back end feature to add. An ex
 
 Please implement a full endpoint for the back end, and a full standalone feature on the front end. Each person's score will be separate and graded accordingly. Shared 10% of score is from live demo.
 
-Update this readme with who implemented which feature.
+Features.
+
+Send Friend Request :
+
+Remove Friend Request : Alex Nikols
+
+List Friends :
+
+Search Friends : 
+
