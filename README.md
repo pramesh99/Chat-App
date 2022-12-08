@@ -12,5 +12,5 @@ Remove Friend Request : Alex Nikols
 
 List Friends : Preetham Ramesh
 
-Search Friends : 
+Search Friends : Jhon Aclan
 
