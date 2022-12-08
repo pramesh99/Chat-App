@@ -6,7 +6,7 @@ Please implement a full endpoint for the back end, and a full standalone feature
 
 Features.
 
-Send Friend Request :
+Send Friend Request : Matthew Hellfeier
 
 Remove Friend Request : Alex Nikols
 
