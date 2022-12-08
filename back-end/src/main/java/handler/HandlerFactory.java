@@ -20,6 +20,8 @@ public class HandlerFactory {
             return new FriendRequestHandler();
         case "/getFriendRequest":
             return new GetFriendRequestHandler();
+        case "/friendRequestRemove":
+            return new RemoveFriendHandler();
         default:
             return new FallbackHandler();
     }
