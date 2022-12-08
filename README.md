@@ -10,7 +10,7 @@ Send Friend Request :
 
 Remove Friend Request : Alex Nikols
 
-List Friends :
+List Friends : Preetham Ramesh
 
 Search Friends : 
 
