@@ -6,6 +6,13 @@ function FriendRequest(props) {
     const [error, setError] = React.useState('');
     const [message, setMessage] = React.useState('');
 
+    const [toId, setToId] = React.useState('');
+    const [friendRequests, setFriendRequests] = React.useState('');
+
+//    componentDidMount(){
+//        window.addEventListener("load", this.getFriendRequests);
+//    }
+
     function handleRequest() {
 
         const cookies = new Cookies();
@@ -50,6 +57,28 @@ function FriendRequest(props) {
         })
     }
 
+    React.useEffect(getFriendRequests, [toId]);
+
+    function getFriendRequests(){
+        console.log("Retrieving friend requests...");
+        const cookies = new Cookies();
+        fetch("/getFriendRequest", {
+            method: "GET",
+            headers: {
+                auth: cookies.get("auth"),
+            }
+        })
+        .then(res => res.json())
+        .then(apiRes => {
+            console.log(apiRes);
+            if (apiRes.status){
+                setFriendRequests(apiRes.data);
+            }
+        })
+        .catch(e => {
+            console.log(e);
+        })
+    }
 
     return (
         <div>
@@ -60,6 +89,13 @@ function FriendRequest(props) {
           </div>
           <div>{error}</div>
           <div>{message}</div>
+          <div>
+            {friendRequests.map(req => (
+                <div>
+                    {req.toId}
+                </div>
+            ))}
+          </div>
         </div>
       );
 }
