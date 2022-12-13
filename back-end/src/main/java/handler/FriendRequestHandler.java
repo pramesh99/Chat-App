@@ -39,8 +39,9 @@ public class FriendRequestHandler implements BaseHandler {
         // if request doesn't exist create one
         if (friendsDao.query(new Document("friendId", friendId)).size() == 0) {
             friendsDto.setFriendId(friendId);
-            friendsDto.setStatus(1); // this is temporary change , revert when accept friend request is complete
+            friendsDto.setStatus(0); // this is temporary change , revert when accept friend request is complete
             friendsDao.put(friendsDto);
+            
 
         }
 

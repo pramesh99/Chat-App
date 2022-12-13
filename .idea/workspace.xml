@@ -1,8 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="6fdeffc4-dde9-47b6-85f0-c229d72876f2" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/back-end/src/main/java/dao/FriendsDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/back-end/src/main/java/dao/FriendsDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/src/main/java/dao/FriendsDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/back-end/src/main/java/handler/FriendRequestHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/src/main/java/handler/FriendRequestHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/back-end/src/main/java/handler/HandlerFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/src/main/java/handler/HandlerFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/back-end/src/main/java/server/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/src/main/java/server/Server.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front-end/src/pages/FriendRequest.js" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/src/pages/FriendRequest.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -20,19 +28,19 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "C:/Users/Alexander nikols/Documents/GitHub/final-project-team-1/back-end",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "preferences.lookFeel"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Alexander nikols/Documents/GitHub/final-project-team-1/back-end&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\Alexander nikols\Documents\GitHub\final-project-team-1" />

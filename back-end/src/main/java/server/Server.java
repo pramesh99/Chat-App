@@ -35,7 +35,7 @@ public class Server {
         byte[] b = new byte[1024*20];
         stream.read(b);
         String input = new String(b).trim();
-        System.out.println(input);
+        // System.out.println(input);
 
         BufferedOutputStream out = new BufferedOutputStream(socket.getOutputStream());
         PrintWriter writer = new PrintWriter(out, true);  // char output to the client

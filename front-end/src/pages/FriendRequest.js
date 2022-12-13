@@ -6,15 +6,18 @@ function FriendRequest(props) {
     const [error, setError] = React.useState('');
     const [message, setMessage] = React.useState('');
 
-    const [toId, setToId] = React.useState('');
-    const [friendRequests, setFriendRequests] = React.useState('');
+    const [friends, setFriends] = React.useState([]);
+    const [incomingRequests, setIncomingRequests] = React.useState([]);
 
-//    componentDidMount(){
-//        window.addEventListener("load", this.getFriendRequests);
-//    }
-
+    React.useEffect(() => {
+        if (toUser == '') {
+        // incoming
+        getFriendRequests(1);
+        // outgoing
+        getFriendRequests(0);
+        }
+    }, [toUser]);
     function handleRequest() {
-
         const cookies = new Cookies();
         const friendRequestDto = {
             fromId: props.loggedInUser,
@@ -33,7 +36,6 @@ function FriendRequest(props) {
         })
         .then(res => {
             console.log(res);
-
             // friend request successful
             if (res.status === 200) {
                 setMessage(`Friend request sent to ${toUser}`);
@@ -50,19 +52,21 @@ function FriendRequest(props) {
             } else if (res.status === 403) {
                 setError(`Can't send request to self`);
                 setMessage(``);    
-            } 
+            } else if (res.status === 404){
+                setError('Error 404');
+                setMessage(``);
+            }
         })
+        .then(() => setToUser(''))
         .catch(e => {
             console.log(e);
         })
     }
 
-    React.useEffect(getFriendRequests, [toId]);
-
-    function getFriendRequests(){
+    function getFriendRequests(incoming){
         console.log("Retrieving friend requests...");
         const cookies = new Cookies();
-        fetch("/getFriendRequest", {
+        fetch(`/getFriendRequest?incoming=${incoming}`, {
             method: "GET",
             headers: {
                 auth: cookies.get("auth"),
@@ -72,29 +76,62 @@ function FriendRequest(props) {
         .then(apiRes => {
             console.log(apiRes);
             if (apiRes.status){
-                setFriendRequests(apiRes.data);
+              if (incoming === 1) {
+                setIncomingRequests(apiRes.data);
+              } else {
+                setFriends(apiRes.data);
+              }
             }
         })
         .catch(e => {
-            console.log(e);
-        })
+          console.log(e);
+        });
+    }
+    
+    function friendRequestAction(a,b){
+
     }
 
     return (
         <div>
           <h1>Friend Request</h1>
           <div>
-            <input value={toUser} onChange={(e) => setToUser(e.target.value)} />
-            <button onClick={handleRequest}>Send</button>
+            <input class="text-input" value={toUser} onChange={(e) => setToUser(e.target.value)} />
+            <button class="submit-button" onClick={handleRequest}>Send</button>
           </div>
-          <div>{error}</div>
           <div>{message}</div>
+          <div>{error}</div>
           <div>
-            {friendRequests.map(req => (
-                <div>
-                    {req.toId}
-                </div>
+            <div class="section-header">Friend Requests</div>
+            {incomingRequests.map(request => (
+              <div>
+                <span class="userName">{request.fromId}</span>
+                <button class="accept-request"
+                    onClick={() => friendRequestAction(request.fromId, 1)}>
+                  Accept
+                </button>
+                <button class="decline-request"
+                    onClick={() => friendRequestAction(request.fromId, -1)}>
+                  Decline
+                </button>
+              </div>
             ))}
+          </div>
+          <div>
+            <div class="section-header">Friends</div>
+            {friends.map(friend => {
+              let friendName = friend.fromId == props.loggedInUser
+                ? friend.toId
+                : friend.fromId;
+              return (
+              <div>
+                <span class="userName">{friendName}</span>
+                <button class="decline-request"
+                    onClick={() => friendRequestAction(friendName, -1)}>
+                  {friend.status ? "Remove Friend" : "Delete Pending Request"}
+                </button>
+              </div>
+            )})}
           </div>
         </div>
       );

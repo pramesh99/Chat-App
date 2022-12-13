@@ -10,7 +10,7 @@ Send Friend Request : Matthew Hellfeier
 
 Remove Friend Request : Alex Nikols
 
-List Friends : Preetham Ramesh
+List Friends and Friend Requests : Preetham Ramesh
 
 Search Friends : Jhon Aclan
 

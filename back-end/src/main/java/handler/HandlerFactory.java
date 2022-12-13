@@ -26,5 +26,4 @@ public class HandlerFactory {
             return new FallbackHandler();
     }
   }
-
 }

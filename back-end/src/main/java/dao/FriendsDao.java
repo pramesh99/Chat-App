@@ -19,7 +19,6 @@ public class FriendsDao extends BaseDao<FriendsDto> {
         super(collection);
     }
 
-
     public static FriendsDao getInstance(){
         if(instance != null){
             return instance;
@@ -41,7 +40,6 @@ public class FriendsDao extends BaseDao<FriendsDto> {
     public  void  updateStatus(Document query,int status){
         Bson update = Updates.set("status",status);
         collection.updateOne(query,update);
-
     }
 
     public void remove(FriendsDto friendsDto){
