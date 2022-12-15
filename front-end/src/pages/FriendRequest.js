@@ -95,7 +95,7 @@ function FriendRequest(props) {
                 setMessage(``);
 
             } else if (res.status === 402) {
-                setError(`User ${toId} does not exist2`);
+                setError(`User ${toId} does not exist`);
                 setMessage(``);
 
             } else if (res.status === 403) {
@@ -140,7 +140,7 @@ function FriendRequest(props) {
                 setMessage(``);
 
             } else if (res.status === 402) {
-                setError(`User ${toId} does not exist1`);
+                setError(`User ${toId} does not exist`);
                 setMessage(``);
 
             } else if (res.status === 403) {
@@ -207,7 +207,9 @@ function FriendRequest(props) {
                 </div>
                 <button class="send-request"
                     onClick={() => {setToId(request.fromId);
-                      friendRequestAction(request.fromId, 1)}}>
+                      handleAcceptRequest()
+                      friendRequestAction(request.fromId, 1)//Bug in accept takes a reload of user for it to show up.
+                    }}>
                   Accept
                 </button>
                 <button class="send-request"
