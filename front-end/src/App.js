@@ -14,6 +14,7 @@ import Login from './pages/Login';
 import Messages from './pages/Messages';
 import FriendRequest from './pages/FriendRequest';
 import RejectFriend from './pages/RejectFriend';
+import SearchFriends from './pages/SearchFriend';
 
 const cookies = new Cookies();
 
@@ -61,6 +62,11 @@ function App() {
                   <Link to="/removeFriend">Remove Friend</Link> 
                 </li>
               )}
+              {isLoggedIn && (
+                <li>
+                  <Link to="/searchFriends">Search Friends</Link>
+                </li>
+              )}
             </ul>
           </nav>
 
@@ -105,6 +111,15 @@ function App() {
               />
             <Route path="/createAccount" element={<CreateAccount />} />
             <Route path="/" element={<Home setIsLoggedIn={setIsLoggedIn} isLoggedIn={isLoggedIn} />} />
+            <Route
+            path="/searchFriends"
+            element={<SearchFriends
+              setIsLoggedIn={setIsLoggedIn}
+              isLoggedIn={isLoggedIn}
+              setLoggedInUser={setLoggedInUser}
+              loggedInUser={loggedInUser}
+            />}
+          />
           </Routes>
         </div>
       </Router>
