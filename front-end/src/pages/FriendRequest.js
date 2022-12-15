@@ -202,8 +202,8 @@ function FriendRequest(props) {
             <div class="section-header">Friend Requests</div>
             {incomingRequests.map(request => (
               <div>
-                <div class="userName">
-                <span>{request.fromId}</span>
+                <div class="userNameWrap">
+                <span class="userName">{request.fromId}</span>
                 </div>
                 <button class="send-request"
                     onClick={() => {setToId(request.fromId);
@@ -228,8 +228,8 @@ function FriendRequest(props) {
                 : friend.fromId;
               return (
               <div>
-                <div class = "userName">
-                    <span>{friendName}</span>
+                <div class = "userNameWrap">
+                    <span class="userName">{friendName}</span>
                 </div>
                 
                 <button class="send-request"

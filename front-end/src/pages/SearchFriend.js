@@ -10,7 +10,7 @@ function SearchFriends() {
     const [filteredFriendsList, setFilteredFriendsList] = useState(friendsList);
 
     // Retrieve the list of friends from the API
-    useEffect(() => {
+    React.useEffect(() => {
         fetch('/api/friends')
             .then(res => res.json())
             .then(friendsList => setFriendsList(friendsList))

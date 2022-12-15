@@ -97,7 +97,7 @@ function RejectFriend(props) {
           <div class= "flex-container">
             <div class="section-header">Friend Requests</div>
             {incomingRequests.map(request => (
-              <div class="userName">
+              <div class="userNameWrap">
                 <span >{request.fromId}</span>
               </div>
             ))}
@@ -109,7 +109,7 @@ function RejectFriend(props) {
                 ? friend.toId
                 : friend.fromId;
               return (
-              <div class="userName">
+              <div class="userNameWrap">
                 <span>{friendName}</span>
               </div>
             )})}
