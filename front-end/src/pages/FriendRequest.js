@@ -189,7 +189,7 @@ function FriendRequest(props) {
       }
     }
 
-    return (
+    return ( // for some reason the first action doesn't seem to load properly 
         <div>
           <h1>Friend Request</h1>
           <div>
