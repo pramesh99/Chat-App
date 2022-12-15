@@ -3,6 +3,7 @@ import Cookies from 'universal-cookie';
 
 function FriendRequest(props) {
     const [toUser, setToUser] = React.useState('');
+    const [toId, setToId] = React.useState('');
     const [error, setError] = React.useState('');
     const [message, setMessage] = React.useState('');
 
@@ -68,7 +69,7 @@ function FriendRequest(props) {
         const cookies = new Cookies();
         const friendRequestDto = {
             fromId: props.loggedInUser,
-            toId: toUser
+            toId: toId
         };
         
         console.log(friendRequestDto);
@@ -86,7 +87,7 @@ function FriendRequest(props) {
 
             // removal of friend logic checks
             if (res.status === 200) {
-                setMessage(`Friend ${toUser} removed`);
+                setMessage(`Friend ${toId} removed`);
                 setError(``);
                 
             } else if (res.status === 401) {
@@ -94,7 +95,7 @@ function FriendRequest(props) {
                 setMessage(``);
 
             } else if (res.status === 402) {
-                setError(`User ${toUser} does not exist`);
+                setError(`User ${toId} does not exist2`);
                 setMessage(``);
 
             } else if (res.status === 403) {
@@ -113,7 +114,7 @@ function FriendRequest(props) {
         const cookies = new Cookies();
         const friendRequestDto = {
             fromId: props.loggedInUser,
-            toId: toUser
+            toId: toId
         };
         
         console.log(friendRequestDto);
@@ -131,15 +132,15 @@ function FriendRequest(props) {
 
             // removal of friend logic checks
             if (res.status === 200) {
-                setMessage(`Friend ${toUser} removed`);
-                setError(``);
+                setMessage(`Friend ${toId} Accepted`);
+                setError(``); 
                 
             } else if (res.status === 401) {
                 setError(`Missing auth header`);
                 setMessage(``);
 
             } else if (res.status === 402) {
-                setError(`User ${toUser} does not exist`);
+                setError(`User ${toId} does not exist1`);
                 setMessage(``);
 
             } else if (res.status === 403) {
@@ -179,7 +180,7 @@ function FriendRequest(props) {
     }
     
     function friendRequestAction(a,b){
-      setToUser(a);
+      setToId(a);
       if(b===-1){
         handleRemoveRequest();
       }
@@ -203,11 +204,13 @@ function FriendRequest(props) {
               <div>
                 <span class="userName">{request.fromId}</span>
                 <button class="accept-request"
-                    onClick={() => friendRequestAction(request.fromId, 1)}>
+                    onClick={() => {setToId(request.fromId);
+                      friendRequestAction(request.fromId, 1)}}>
                   Accept
                 </button>
                 <button class="decline-request"
-                    onClick={() => friendRequestAction(request.fromId, -1)}>
+                    onClick={() => {
+                    friendRequestAction(request.fromId, -1)}}>
                   Decline
                 </button>
               </div>
@@ -222,8 +225,10 @@ function FriendRequest(props) {
               return (
               <div>
                 <span class="userName">{friendName}</span>
+                <div></div>
                 <button class="decline-request"
-                    onClick={() => {friendRequestAction(friendName, -1)}}>
+                    onClick={() => { setToId(friendName);
+                      friendRequestAction(friendName, -1)}}>
                   {friend.status ? "Remove Friend" : "Delete Pending Request"}
                 </button>
               </div>
