@@ -5,8 +5,10 @@ import dto.FriendsDto;
 import java.util.ArrayList;
 import java.util.List;
 import org.bson.Document;
+import request.ParsedRequest;
+import response.HttpResponseBuilder;
 
-public class SearchFriendsHandler {
+public class SearchFriendsHandler implements BaseHandler {
 
     private final FriendsDao friendsDao;
 
@@ -14,19 +16,23 @@ public class SearchFriendsHandler {
         this.friendsDao = friendsDao;
     }
 
-    public List<String> search(String query) {
+    @Override
+    public HttpResponseBuilder handleRequest(ParsedRequest request) {
+        HttpResponseBuilder res = new HttpResponseBuilder();
+        String userName = request.getQueryParam("Name");
+
+        // Search the friends list for matches with the given Name
         List<String> results = new ArrayList<>();
-
-        // Convert the query to lowercase to make the search case-insensitive
-        query = query.toLowerCase();
-
-        // Search the friends list for matches with the given query
         for (FriendsDto friend : friendsDao.query(new Document())) {
-            if (friend.getFriendId().toLowerCase().contains(query)) {
+            if (friend.getFriendId().toLowerCase().contains(userName.toLowerCase())) {
                 results.add(friend.getFriendId());
             }
         }
 
-        return results;
+        // Give out response based on the results
+        HttpResponseBuilder response = new HttpResponseBuilder();
+        response.setStatus(StatusCodes.OK);
+        response.setBody(GsonTool.gson.toJson(results));
+        return response;
     }
 }
