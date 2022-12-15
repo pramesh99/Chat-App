@@ -1,10 +1,11 @@
 import React from 'react';
 import Cookies from 'universal-cookie';
 
-function RejectFriend(props) {
+function AcceptFriend(props) {
     const [toUser, setToUser] = React.useState('');
     const [error, setError] = React.useState('');
     const [message, setMessage] = React.useState('');
+
     const [friends, setFriends] = React.useState([]);
     const [incomingRequests, setIncomingRequests] = React.useState([]);
     React.useEffect(() => {
@@ -26,7 +27,7 @@ function RejectFriend(props) {
         console.log(friendRequestDto);
 
         // makes api call to handle remove friend response
-        fetch('/friendRequestRemove', {
+        fetch('/friendAccept', {
             method: 'POST',
             body: JSON.stringify(friendRequestDto),
             headers: {
@@ -38,7 +39,7 @@ function RejectFriend(props) {
 
             // removal of friend logic checks
             if (res.status === 200) {
-                setMessage(`Friend ${toUser} removed`);
+                setMessage(`Friend ${toUser} Accepted`);
                 setError(``);
                 
             } else if (res.status === 401) {
@@ -50,7 +51,7 @@ function RejectFriend(props) {
                 setMessage(``);
 
             } else if (res.status === 403) {
-                setError(`Cannot unfriend self`);
+                setError(`Cannot friend self`);
                 setMessage(``);    
             } 
         })
@@ -58,6 +59,7 @@ function RejectFriend(props) {
             console.log(e);
         })
     }
+
     function getFriendRequests(incoming){
         console.log("Retrieving friend requests...");
         const cookies = new Cookies();
@@ -86,7 +88,7 @@ function RejectFriend(props) {
 
     return (
         <div>
-          <h1>Remove Friend Request</h1>
+          <h1>Accept Friend Request</h1>
           <div>
             <input value={toUser} onChange={(e) => setToUser(e.target.value)} />
             <button onClick={handleRequest}>Send</button>
@@ -117,4 +119,4 @@ function RejectFriend(props) {
       );
 }
 
-export default RejectFriend;
+export default AcceptFriend;

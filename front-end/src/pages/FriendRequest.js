@@ -10,7 +10,7 @@ function FriendRequest(props) {
     const [incomingRequests, setIncomingRequests] = React.useState([]);
 
     React.useEffect(() => {
-        if (toUser == '') {
+        if (toUser === '') {
         // incoming
         getFriendRequests(1);
         // outgoing
@@ -63,6 +63,96 @@ function FriendRequest(props) {
         })
     }
 
+    function handleRemoveRequest() {
+
+        const cookies = new Cookies();
+        const friendRequestDto = {
+            fromId: props.loggedInUser,
+            toId: toUser
+        };
+        
+        console.log(friendRequestDto);
+
+        // makes api call to handle remove friend response
+        fetch('/friendRequestRemove', {
+            method: 'POST',
+            body: JSON.stringify(friendRequestDto),
+            headers: {
+                auth: cookies.get('auth'),
+            }
+        })
+        .then(res => {
+            console.log(res);
+
+            // removal of friend logic checks
+            if (res.status === 200) {
+                setMessage(`Friend ${toUser} removed`);
+                setError(``);
+                
+            } else if (res.status === 401) {
+                setError(`Missing auth header`);
+                setMessage(``);
+
+            } else if (res.status === 402) {
+                setError(`User ${toUser} does not exist`);
+                setMessage(``);
+
+            } else if (res.status === 403) {
+                setError(`Cannot unfriend self`);
+                setMessage(``);    
+            } 
+        })
+        .then(() => setToUser(''))
+        .catch(e => {
+            console.log(e);
+        })
+    }
+
+    function handleAcceptRequest() {
+
+        const cookies = new Cookies();
+        const friendRequestDto = {
+            fromId: props.loggedInUser,
+            toId: toUser
+        };
+        
+        console.log(friendRequestDto);
+
+        // makes api call to handle remove friend response
+        fetch('/friendAccept', {
+            method: 'POST',
+            body: JSON.stringify(friendRequestDto),
+            headers: {
+                auth: cookies.get('auth'),
+            }
+        })
+        .then(res => {
+            console.log(res);
+
+            // removal of friend logic checks
+            if (res.status === 200) {
+                setMessage(`Friend ${toUser} removed`);
+                setError(``);
+                
+            } else if (res.status === 401) {
+                setError(`Missing auth header`);
+                setMessage(``);
+
+            } else if (res.status === 402) {
+                setError(`User ${toUser} does not exist`);
+                setMessage(``);
+
+            } else if (res.status === 403) {
+                setError(`Cannot unfriend self`);
+                setMessage(``);    
+            } 
+        })
+        .then(() => setToUser(''))
+        .catch(e => {
+            console.log(e);
+        })
+    }
+
     function getFriendRequests(incoming){
         console.log("Retrieving friend requests...");
         const cookies = new Cookies();
@@ -89,7 +179,13 @@ function FriendRequest(props) {
     }
     
     function friendRequestAction(a,b){
-
+      setToUser(a);
+      if(b===-1){
+        handleRemoveRequest();
+      }
+      if(b===1){
+        handleAcceptRequest();
+      }
     }
 
     return (
@@ -120,14 +216,14 @@ function FriendRequest(props) {
           <div>
             <div class="section-header">Friends</div>
             {friends.map(friend => {
-              let friendName = friend.fromId == props.loggedInUser
+              let friendName = friend.fromId === props.loggedInUser
                 ? friend.toId
                 : friend.fromId;
               return (
               <div>
                 <span class="userName">{friendName}</span>
                 <button class="decline-request"
-                    onClick={() => friendRequestAction(friendName, -1)}>
+                    onClick={() => {friendRequestAction(friendName, -1)}}>
                   {friend.status ? "Remove Friend" : "Delete Pending Request"}
                 </button>
               </div>

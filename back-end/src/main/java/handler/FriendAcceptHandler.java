@@ -10,13 +10,9 @@ import response.HttpResponseBuilder;
 import java.util.List;
 import java.util.Objects;
 
-public class RemoveFriendHandler implements BaseHandler{
-
-
-    @Override
+public class FriendAcceptHandler implements BaseHandler{
     public HttpResponseBuilder handleRequest(ParsedRequest request) {
         HttpResponseBuilder res = new HttpResponseBuilder();
-        RemoveFriendTool removeFriendTool = new RemoveFriendTool();
         FriendsDto friendsDto = GsonTool.gson.fromJson(request.getBody(), dto.FriendsDto.class);
         FriendsDao friendsDao = FriendsDao.getInstance();
         UserDao userDao = UserDao.getInstance();
@@ -34,14 +30,10 @@ public class RemoveFriendHandler implements BaseHandler{
         } else if (Objects.equals(fromId, toId)) {
             return res.setStatus("403 Friend request sever error");
         }
-
         String friendId = CreateMessageHandler.makeConvoId(fromId, toId);
         List<FriendsDto> temp = friendsDao.query(new Document("friendId", friendId));
-        friendsDao.updateStatus(new Document("friendId", friendId),-1);
+        friendsDao.updateStatus(new Document("friendId", friendId),1);
 
-
-        removeFriendTool.friendCleanup(fromId);
-        removeFriendTool.friendCleanup(toId);
 
         return res.setStatus(StatusCodes.OK);
     }
