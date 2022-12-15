@@ -38,8 +38,10 @@ function Login(props) {
     <div>
       <h1> Login Page</h1>
       <div>
-        <input value={userName} onChange={(e) => setUserName(e.target.value)} />
-        <input value={password} onChange={(e) => setPassword(e.target.value)} type="password" />
+        <input value={userName} placeholder="Username" onChange={(e) => setUserName(e.target.value)} />
+        <div></div>
+        <input value={password} placeholder="Password" onChange={(e) => setPassword(e.target.value)} type="password" />
+        <div></div>
         <button onClick={handleSubmit}>Login</button>
       </div>
       <div>{error}</div>

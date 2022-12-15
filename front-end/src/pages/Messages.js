@@ -75,12 +75,11 @@ function Messages(props) {
     <div>
       <h1> Messages Page</h1>
       <h2>Welcome {props.loggedInUser}</h2>
-      <div>
+      <div class= "flex-container">
         <div>
-          To:
-          <input value={toUser} onChange={(e) => setToUser(e.target.value)}/>
+          <input value={toUser} placeholder="To:" onChange={(e) => setToUser(e.target.value)}/>
         </div>
-        <textarea value={text} onChange={(e) => setText(e.target.value)}/>
+        <textarea value={text} placeholder="Message"  onChange={(e) => setText(e.target.value)}/>
         <div>
             <button onClick={sendMessage}>Send</button>
         </div>
@@ -88,7 +87,7 @@ function Messages(props) {
 
         <div>
           {conversation.map(convo => (
-            <div>
+            <div class = "conversation">
               {convo.message}
             </div>
           ))}

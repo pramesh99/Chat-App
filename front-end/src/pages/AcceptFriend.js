@@ -96,24 +96,26 @@ function AcceptFriend(props) {
           <div>{error}</div>
           <div>{message}</div>
           <div>
-          <div>
+          <div class= "flex-container">
             <div class="section-header">Friend Requests</div>
             {incomingRequests.map(request => (
-              <div>
-                <span class="userName">{request.fromId}</span>
+              <div class="userName">
+                <span >{request.fromId}</span>
               </div>
             ))}
-          </div>
+          </div >
+          <div class= "flex-container">
             <div class="section-header">Friends</div>
             {friends.map(friend => {
               let friendName = friend.fromId === props.loggedInUser
                 ? friend.toId
                 : friend.fromId;
               return (
-              <div>
-                <span class="userName">{friendName}</span>
+              <div class="userName">
+                <span>{friendName}</span>
               </div>
             )})}
+          </div>
           </div>
         </div>
       );

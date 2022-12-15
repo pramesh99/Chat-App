@@ -198,17 +198,19 @@ function FriendRequest(props) {
           </div>
           <div>{message}</div>
           <div>{error}</div>
-          <div>
+          <div class= "flex-container">
             <div class="section-header">Friend Requests</div>
             {incomingRequests.map(request => (
               <div>
-                <span class="userName">{request.fromId}</span>
-                <button class="accept-request"
+                <div class="userName">
+                <span>{request.fromId}</span>
+                </div>
+                <button class="send-request"
                     onClick={() => {setToId(request.fromId);
                       friendRequestAction(request.fromId, 1)}}>
                   Accept
                 </button>
-                <button class="decline-request"
+                <button class="send-request"
                     onClick={() => {
                     friendRequestAction(request.fromId, -1)}}>
                   Decline
@@ -216,7 +218,7 @@ function FriendRequest(props) {
               </div>
             ))}
           </div>
-          <div>
+          <div class= "flex-container">
             <div class="section-header">Friends</div>
             {friends.map(friend => {
               let friendName = friend.fromId === props.loggedInUser
@@ -224,9 +226,11 @@ function FriendRequest(props) {
                 : friend.fromId;
               return (
               <div>
-                <span class="userName">{friendName}</span>
-                <div></div>
-                <button class="decline-request"
+                <div class = "userName">
+                    <span>{friendName}</span>
+                </div>
+                
+                <button class="send-request"
                     onClick={() => { setToId(friendName);
                       friendRequestAction(friendName, -1)}}>
                   {friend.status ? "Remove Friend" : "Delete Pending Request"}
